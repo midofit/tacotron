@@ -31,7 +31,8 @@ def eval():
     z = np.expand_dims(mag, 0) # (1, None, n_mfccs)
 
     saver = tf.train.Saver()
-    with tf.Session() as sess:
+    config = tf.ConfigProto(allow_soft_placement = True)
+    with tf.Session(config=config) as sess:
         saver.restore(sess, tf.train.latest_checkpoint(hp.logdir)); print("Restored!")
 
         writer = tf.summary.FileWriter(hp.logdir, sess.graph)

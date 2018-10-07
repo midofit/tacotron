@@ -26,9 +26,10 @@ def synthesize():
 
     # Load data
     texts = load_data(mode="synthesize")
-
     saver = tf.train.Saver()
-    with tf.Session() as sess:
+    config = tf.ConfigProto(allow_soft_placement = True)
+
+    with tf.Session(config=config) as sess:
         saver.restore(sess, tf.train.latest_checkpoint(hp.logdir)); print("Restored!")
 
         # Feed Forward

@@ -24,7 +24,7 @@ def encoder(inputs, is_training=True, scope="encoder", reuse=None):
     Returns:
       A collection of Hidden vectors. So-called memory. Has the shape of (N, T_x, E).
     '''
-    with tf.variable_scope(scope, reuse=reuse): 
+    with tf.variable_scope(scope, reuse=reuse),tf.device("/device:GPU:0"): 
         # Encoder pre-net
         prenet_out = prenet(inputs, is_training=is_training) # (N, T_x, E/2)
         
@@ -99,7 +99,7 @@ def decoder2(inputs, is_training=True, scope="decoder2", reuse=None):
     Returns
       Predicted linear spectrogram tensor with shape of [N, T_y, 1+n_fft//2].
     '''
-    with tf.variable_scope(scope, reuse=reuse):
+    with tf.variable_scope(scope, reuse=reuse),tf.device("/device:GPU:0"):
         # Restore shape -> (N, Ty, n_mels)
         inputs = tf.reshape(inputs, [tf.shape(inputs)[0], -1, hp.n_mels])
 

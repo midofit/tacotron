@@ -8,12 +8,12 @@ class Hyperparams:
     '''Hyper parameters'''
     
     # pipeline
-    prepro = False  # if True, run `python prepro.py` first before running `python train.py`.
+    prepro = True  # if True, run `python prepro.py` first before running `python train.py`.
 
-    vocab = "PE abcdefghijklmnopqrstuvwxyz'.?" # P: Padding E: End of Sentence
+    vocab = "PE !\"%&(),-./0123456789:;?abcdefghijklmnopqrstuvwxyzàáâãèéêìíòóôõùúýăđĩũơưạảấầẩẫậắằẳẵặẹẻẽếềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ–‘’“”•…" # P: Padding E: End of Sentence
 
     # data
-    data = "/data/private/voice/LJSpeech-1.0"
+    data = "./data"
     # data = "/data/private/voice/nick"
     test_data = 'harvard_sentences.txt'
     max_duration = 10.0
@@ -44,7 +44,7 @@ class Hyperparams:
     lr = 0.001 # Initial learning rate.
     logdir = "logdir/01"
     sampledir = 'samples'
-    batch_size = 32
+    batch_size = 8
 
 
 

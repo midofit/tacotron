@@ -40,13 +40,13 @@ def load_data(mode="train"):
         transcript = os.path.join(hp.data, 'transcript.csv')
         lines = codecs.open(transcript, 'r', 'utf-8').readlines()
         total_hours = 0
-        if mode=="train":
-            lines = lines[1:]
-        else: # We attack only one sample!
-            lines = lines[:1]
+        # if mode=="train":
+        #     lines = lines[1:]
+        # else: # We attack only one sample!
+        #     lines = lines[:1]
 
         for line in lines:
-            fname, _, text = line.strip().split("|")
+            _,fname, text = line.strip().split("|")
 
             fpath = os.path.join(hp.data, "wavs", fname + ".wav")
             fpaths.append(fpath)
@@ -90,7 +90,7 @@ def get_batch():
 
         if hp.prepro:
             def _load_spectrograms(fpath):
-                fname = os.path.basename(fpath)
+                fname = os.path.basename(fpath).decode("utf-8")
                 mel = "mels/{}".format(fname.replace("wav", "npy"))
                 mag = "mags/{}".format(fname.replace("wav", "npy"))
                 return fname, np.load(mel), np.load(mag)
